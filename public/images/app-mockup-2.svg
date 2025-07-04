@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600">
+  <defs>
+    <linearGradient id="phoneGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d9488;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Phone mockup -->
+  <rect x="20" y="20" width="360" height="560" rx="40" ry="40" fill="url(#phoneGradient2)" stroke="#333" stroke-width="2"/>
+  <rect x="40" y="80" width="320" height="480" rx="20" ry="20" fill="#fff"/>
+  
+  <!-- Chat interface -->
+  <rect x="60" y="120" width="280" height="40" rx="20" fill="#f0fdfa"/>
+  <circle cx="90" cy="140" r="15" fill="#14b8a6"/>
+  <rect x="120" y="130" width="100" height="8" rx="4" fill="#14b8a6" opacity="0.7"/>
+  <rect x="120" y="145" width="80" height="6" rx="3" fill="#14b8a6" opacity="0.5"/>
+  
+  <!-- Message bubbles -->
+  <rect x="80" y="180" width="180" height="40" rx="20" fill="#e6fffa"/>
+  <rect x="140" y="240" width="160" height="40" rx="20" fill="#fdf4ff"/>
+  <rect x="80" y="300" width="200" height="40" rx="20" fill="#e6fffa"/>
+  
+  <!-- Video call interface -->
+  <rect x="60" y="360" width="280" height="160" rx="15" fill="#000" opacity="0.1"/>
+  <circle cx="200" cy="440" r="40" fill="#14b8a6" opacity="0.3"/>
+  <polygon points="180,440 220,420 220,460" fill="#fff"/>
+  
+  <text x="200" y="550" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif" font-size="14">Video Chat Feature</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+  <defs>
+    <linearGradient id="coupleGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef7ee;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fdedd6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="300" height="200" fill="url(#coupleGradient1)"/>
+  
+  <!-- Sri Lankan scenic background -->
+  <ellipse cx="150" cy="160" rx="100" ry="40" fill="#22c55e" opacity="0.3"/>
+  <polygon points="50,160 100,120 150,140 200,110 250,130 300,120 300,200 0,200" fill="#22c55e" opacity="0.2"/>
+  
+  <!-- Couple silhouettes -->
+  <circle cx="120" cy="80" r="25" fill="#f59540" opacity="0.8"/>
+  <rect x="105" y="100" width="30" height="50" rx="15" fill="#f59540" opacity="0.8"/>
+  
+  <circle cx="180" cy="80" r="22" fill="#d946ef" opacity="0.8"/>
+  <rect x="168" y="100" width="24" height="45" rx="12" fill="#d946ef" opacity="0.8"/>
+  
+  <!-- Hearts floating -->
+  <text x="150" y="40" text-anchor="middle" fill="#ef4444" font-size="16" opacity="0.6">♥</text>
+  <text x="70" y="60" text-anchor="middle" fill="#ef4444" font-size="12" opacity="0.4">♥</text>
+  <text x="230" y="70" text-anchor="middle" fill="#ef4444" font-size="10" opacity="0.5">♥</text>
+  
+  <text x="150" y="190" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif" font-size="12">Priya & Kasun - Colombo</text>
+</svg>
