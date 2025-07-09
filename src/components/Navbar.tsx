@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon, HeartIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,20 +71,42 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-lg font-medium transition-colors duration-300 text-white/90 hover:text-white"
-            >
-              Sign In
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-primary"
-            >
-              Join Now
-            </motion.button>
+            <Link href="/login">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-lg font-medium transition-colors duration-300 text-white/90 hover:text-white"
+              >
+                Sign In
+              </motion.button>
+            </Link>
+            <Link href="/register">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-primary"
+              >
+                Join Now
+              </motion.button>
+            </Link>
+            <Link href="/complete-profile">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-300 text-sm"
+              >
+                Complete Profile
+              </motion.button>
+            </Link>
+            <Link href="/browse">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-pink-400 hover:text-pink-300 font-medium transition-colors duration-300 text-sm"
+              >
+                Browse Users
+              </motion.button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -125,12 +148,38 @@ const Navbar = () => {
                 </motion.a>
               ))}
               <div className="pt-4 space-y-3">
-                <button className="w-full text-left text-white/90 text-lg font-medium hover:text-white transition-colors duration-300">
-                  Sign In
-                </button>
-                <button className="w-full btn-primary text-center">
-                  Join Now
-                </button>
+                <Link href="/login" className="block">
+                  <button 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full text-left text-white/90 text-lg font-medium hover:text-white transition-colors duration-300"
+                  >
+                    Sign In
+                  </button>
+                </Link>
+                <Link href="/register" className="block">
+                  <button 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full btn-primary text-center"
+                  >
+                    Join Now
+                  </button>
+                </Link>
+                <Link href="/complete-profile" className="block">
+                  <button 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full text-left text-purple-400 text-lg font-medium hover:text-purple-300 transition-colors duration-300"
+                  >
+                    Complete Profile
+                  </button>
+                </Link>
+                <Link href="/browse" className="block">
+                  <button 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full text-left text-pink-400 text-lg font-medium hover:text-pink-300 transition-colors duration-300"
+                  >
+                    Browse Users
+                  </button>
+                </Link>
               </div>
             </div>
           </motion.div>
