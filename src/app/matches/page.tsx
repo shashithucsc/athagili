@@ -11,6 +11,7 @@ import {
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
+import ChatButton from "../../components/ChatButton";
 
 interface MatchedUser {
   id: string;
@@ -187,7 +188,7 @@ const MatchCard: React.FC<{
           {/* Message Button */}
           <Link href={`/chat/${match.id}`}>
             <motion.button
-              className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold py-2.5 px-4 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 group/btn"
+              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-4 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 group/btn"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
