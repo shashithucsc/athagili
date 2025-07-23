@@ -28,8 +28,12 @@ interface UserProfile {
   bio: string;
   gender: string;
   photo: string;
+  profilePictureUrl?: string;  // Additional profile picture URL option
+  photoAlt?: string;          // Alternative text for accessibility
   interests: Interest[];
   status: string;
+  isOnline?: boolean;         // Online status
+  lastActive?: string;        // Last active timestamp
   matchStats: {
     matches: number;
     likesReceived: number;
@@ -46,6 +50,9 @@ const DUMMY_PROFILE: UserProfile = {
   bio: "Life is a journey best enjoyed with good coffee and better company. Always seeking new adventures and meaningful connections.",
   gender: "Female",
   photo: "/images/couple-2.svg", // Using a better placeholder image
+  photoAlt: "Profile photo of Nimali",
+  isOnline: true,
+  lastActive: "Just now",
   interests: [
     { name: "Travel", emoji: "🌴" },
     { name: "Art", emoji: "🎨" },
@@ -117,10 +124,12 @@ export default function ProfilePage() {
                   hover: { opacity: 0.5, scale: 1.05 }
                 }}
                 transition={{ duration: 0.4 }}
+                style={{ aspectRatio: "1 / 1" }}
               ></motion.div>
 
-              <div className="relative mx-auto w-44 h-44 sm:w-52 sm:h-52">
-                {/* Outer animated ring */}
+              {/* Perfect circle container with fixed aspect ratio */}
+              <div className="relative mx-auto w-48 h-48 sm:w-56 sm:h-56">
+                {/* Outer animated ring with perfect circle */}
                 <motion.div
                   className="absolute -inset-3 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 opacity-75"
                   animate={{
@@ -131,9 +140,10 @@ export default function ProfilePage() {
                     repeat: Infinity,
                     ease: "linear"
                   }}
+                  style={{ aspectRatio: "1 / 1" }}
                 ></motion.div>
                 
-                {/* Secondary rotating ring (opposite direction) */}
+                {/* Secondary rotating ring (opposite direction) with perfect circle */}
                 <motion.div
                   className="absolute -inset-2 rounded-full bg-gradient-to-r from-purple-400 via-fuchsia-400 to-indigo-400 opacity-50"
                   animate={{
@@ -144,12 +154,13 @@ export default function ProfilePage() {
                     repeat: Infinity,
                     ease: "linear"
                   }}
+                  style={{ aspectRatio: "1 / 1" }}
                 ></motion.div>
                 
-                {/* Dark border spacer */}
-                <div className="absolute inset-0 -m-1 rounded-full bg-neutral-900"></div>
+                {/* Dark border spacer - ensuring perfect circle */}
+                <div className="absolute inset-0 -m-1 rounded-full bg-neutral-900" style={{ aspectRatio: "1 / 1" }}></div>
                 
-                {/* Main image container with double border */}
+                {/* Main image container with double border and perfect circle */}
                 <motion.div 
                   className="absolute inset-0 rounded-full overflow-hidden border-[4px] border-white/15 shadow-[0_0_25px_rgba(79,70,229,0.4)]"
                   initial={{ scale: 0.8, opacity: 0 }}
@@ -158,26 +169,29 @@ export default function ProfilePage() {
                   variants={{
                     hover: { scale: 1.03, borderColor: "rgba(255,255,255,0.25)" }
                   }}
+                  style={{ aspectRatio: "1 / 1" }}
                 >
                   {/* Glass overlay effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-300/20 to-purple-400/20 z-10 mix-blend-overlay"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-300/20 to-purple-400/20 z-10 mix-blend-overlay rounded-full"></div>
                   
-                  {/* Profile image */}
-                  <Image
-                    src={profile.photo}
-                    alt={profile.name}
-                    fill
-                    className="rounded-full object-cover z-0 transition-transform duration-500"
-                    priority
-                    sizes="(max-width: 640px) 176px, 208px"
-                  />
+                  {/* Profile image - ensuring perfect circle */}
+                  <div className="relative w-full h-full rounded-full overflow-hidden">
+                    <Image
+                      src={profile.profilePictureUrl || profile.photo}
+                      alt={profile.photoAlt || `${profile.name}'s profile photo`}
+                      fill
+                      className="rounded-full object-cover z-0 transition-transform duration-500 hover:scale-105"
+                      priority
+                      sizes="(max-width: 640px) 192px, 224px"
+                    />
+                  </div>
                   
                   {/* Subtle overlay for better text contrast */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-full"></div>
                   
                   {/* Hover overlay effect */}
                   <motion.div 
-                    className="absolute inset-0 bg-indigo-600/10 z-20 backdrop-blur-sm"
+                    className="absolute inset-0 bg-indigo-600/10 z-20 backdrop-blur-sm rounded-full"
                     variants={{
                       hover: { opacity: 1 },
                       initial: { opacity: 0 }
@@ -187,7 +201,7 @@ export default function ProfilePage() {
                   
                   {/* Placeholder for empty profile image */}
                   {!profile.photo && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-800/40 to-purple-900/40">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-800/40 to-purple-900/40 rounded-full">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
@@ -204,6 +218,7 @@ export default function ProfilePage() {
                   variants={{
                     hover: { opacity: 0.8, shadow: "inset_0_0_30px_rgba(168,122,255,0.7)" }
                   }}
+                  style={{ aspectRatio: "1 / 1" }}
                 ></motion.div>
                 
                 {/* Animated shine effect */}
@@ -212,6 +227,7 @@ export default function ProfilePage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: [0, 0.7, 0] }}
                   transition={{ delay: 0.5, duration: 2, repeat: Infinity, repeatDelay: 6 }}
+                  style={{ aspectRatio: "1 / 1" }}
                 >
                   <div className="w-[200%] h-32 bg-gradient-to-r from-transparent via-white/25 to-transparent absolute -top-10 -left-full skew-y-[25deg] transform-gpu"></div>
                 </motion.div>
@@ -230,26 +246,42 @@ export default function ProfilePage() {
                   </Link>
                 </div>
                 
-                {/* Status indicator - Online */}
-                <motion.div 
-                  className="absolute bottom-4 right-4 w-5 h-5 rounded-full bg-emerald-400 border-2 border-neutral-900 z-20"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.6, type: "spring" }}
-                >
+                {/* Status indicator - Online/Offline */}
+                {profile.isOnline && (
                   <motion.div 
-                    className="w-full h-full rounded-full bg-emerald-400"
-                    animate={{ opacity: [1, 0.5, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  
-                  {/* Pulsing effect */}
+                    className="absolute bottom-4 right-4 w-5 h-5 rounded-full bg-emerald-400 border-2 border-neutral-900 z-20"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.6, type: "spring" }}
+                    style={{ aspectRatio: "1 / 1" }}
+                    title={profile.isOnline ? "Online" : `Last active: ${profile.lastActive}`}
+                  >
+                    <motion.div 
+                      className="w-full h-full rounded-full bg-emerald-400"
+                      animate={{ opacity: [1, 0.5, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    
+                    {/* Pulsing effect */}
+                    <motion.div 
+                      className="absolute -inset-1 rounded-full bg-emerald-400 z-[-1]"
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.7, 0, 0.7] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                  </motion.div>
+                )}
+                
+                {/* Offline status indicator */}
+                {!profile.isOnline && profile.lastActive && (
                   <motion.div 
-                    className="absolute -inset-1 rounded-full bg-emerald-400 z-[-1]"
-                    animate={{ scale: [1, 1.5, 1], opacity: [0.7, 0, 0.7] }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute bottom-4 right-4 w-5 h-5 rounded-full bg-gray-400 border-2 border-neutral-900 z-20"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.6, type: "spring" }}
+                    style={{ aspectRatio: "1 / 1" }}
+                    title={`Last active: ${profile.lastActive}`}
                   />
-                </motion.div>
+                )}
               </div>
             </motion.div>
             
