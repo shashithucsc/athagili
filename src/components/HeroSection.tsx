@@ -19,10 +19,15 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
-      {/* Background Video */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 via-gray-800/60 to-gray-900/70 z-10"></div>
+    <section id="home" className="relative overflow-hidden bg-gray-900">
+      {/* Navbar spacer - creates space for the fixed navbar */}
+      <div className="h-24 lg:h-28"></div>
+      
+      {/* Hero content with min-height to fill remaining space */}
+      <div className="relative min-h-[calc(100vh-6rem)] lg:min-h-[calc(100vh-7rem)] flex items-center justify-center">
+        {/* Background Video */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 via-gray-800/60 to-gray-900/70 z-10"></div>
         
         {/* Glass morphism overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/40 backdrop-blur-[2px] z-15"></div>
@@ -159,6 +164,7 @@ const HeroSection = () => {
             </div>
           </motion.div>
         </motion.div>
+      </div>
       </div>
 
       {/* Floating Elements */}
