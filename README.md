@@ -19,3 +19,5 @@ A modern, scalable dating web application built with Next.js, TypeScript, Tailwi
 ## Project Structure
 
 See comments in each folder for details. 
+
+[Homepage Screenshot](https://github.com/user-attachments/assets/fd68ed53-f27f-4474-9f83-cf446f35bfbb)
