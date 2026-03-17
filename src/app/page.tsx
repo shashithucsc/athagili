@@ -8,11 +8,13 @@ import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import FeaturesSection from '../components/FeaturesSection';
 import HowItWorksSection from '../components/HowItWorksSection';
+import SafetySection from '../components/SafetySection';
 import EnhancedAppGallery from '../components/EnhancedAppGallery';
 import TestimonialsSection from '../components/TestimonialsSection';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import AnimatedBackground from '../components/AnimatedBackground';
+import MouseGlow from '../components/MouseGlow';
 
 // Hooks
 import { useSmoothScroll, useParallax } from '../utils/hooks';
@@ -45,11 +47,13 @@ export default function Home() {
           transition={{ duration: 0.5 }}
           className="relative"
         >
+          <MouseGlow />
           <AnimatedBackground />
           <Navbar />
           <HeroSection />
           <FeaturesSection />
           <HowItWorksSection />
+          <SafetySection />
           <EnhancedAppGallery />
           <TestimonialsSection />
           <Footer />

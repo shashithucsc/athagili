@@ -1,248 +1,205 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { ChevronDownIcon, PlayIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import { HeartIcon } from '@heroicons/react/24/solid';
 
 const HeroSection = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   
   const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
-    animate: { opacity: 1, y: 0 }
+    initial: { opacity: 0, y: 40 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
   };
 
   const stagger = {
     animate: {
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.15
       }
     }
   };
 
   return (
-    <section id="home" className="relative overflow-hidden bg-gray-900">
-      {/* Navbar spacer - creates space for the fixed navbar */}
-      <div className="h-24 lg:h-28"></div>
+    <section id="home" className="relative overflow-hidden bg-gray-950">
+      {/* Navbar spacer */}
+      <div className="h-20 lg:h-24"></div>
       
-      {/* Hero content with min-height to fill remaining space */}
-      <div className="relative min-h-[calc(100vh-6rem)] lg:min-h-[calc(100vh-7rem)] flex items-center justify-center">
-        {/* Background Video */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 via-gray-800/60 to-gray-900/70 z-10"></div>
+      {/* Hero content taking full remaining viewport height */}
+      <div className="relative min-h-[calc(100vh-5rem)] lg:min-h-[calc(100vh-6rem)] flex flex-col justify-between">
         
-        {/* Glass morphism overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/40 backdrop-blur-[2px] z-15"></div>
-        
-        {/* Video Background */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-80"
-        >
-          <source src="/videos/background.mp4" type="video/mp4" />
-          {/* Fallback gradient */}
-          <div className="w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
-        </video>
+        {/* --- Background Elements --- */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {/* Base gradient & Glass overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-gray-900/40 to-gray-950/90 z-10"></div>
+          <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] z-15"></div>
+          
+          {/* Video Background */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity"
+          >
+            <source src="/videos/background.mp4" type="video/mp4" />
+            <div className="w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950" />
+          </video>
 
-        {/* Animated particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-white rounded-full opacity-30"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -100, 0],
-                opacity: [0.3, 0.8, 0.3],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
+          {/* Animated particles */}
+          <div className="absolute inset-0 overflow-hidden z-20">
+            {[...Array(15)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1.5 h-1.5 bg-white/50 rounded-full"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -80, 0],
+                  opacity: [0.2, 0.6, 0.2],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 3,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Glowing orbs */}
+          <motion.div
+            animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px]"
+          />
+          <motion.div
+            animate={{ x: [0, -50, 0], y: [0, 40, 0] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-pink-600/10 rounded-full blur-[120px]"
+          />
         </div>
 
-        {/* Glowing orbs */}
-        <motion.div
-          animate={{ 
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ 
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full opacity-20 blur-xl"
-        />
-        <motion.div
-          animate={{ 
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{ 
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
-          className="absolute bottom-32 left-20 w-24 h-24 bg-gradient-to-r from-gray-700 to-gray-600 rounded-full opacity-20 blur-xl"
-        />
-      </div>
+        {/* --- Top Content: Headline & Social Proof --- */}
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24 text-center flex-grow flex flex-col justify-center">
+          <motion.div variants={stagger} initial="initial" animate="animate" className="space-y-6">
+            <motion.div variants={fadeInUp}>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6">
+                <SparklesIcon className="w-4 h-4 text-purple-400" />
+                <span className="text-sm font-medium text-white/80 tracking-wide">The #1 Inter-University Platform</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-tight">
+                Find Your <br />
+                <span className="text-transparent bg-clip-text bg-purple-500  inline-flex items-center gap-4">
+                  Partner <HeartIcon className="w-12 h-12 md:w-16 md:h-16 text-purple-500 hidden sm:block animate-pulse" />
+                </span>
+              </h1>
+            </motion.div>
 
-      {/* Content */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
-          variants={stagger}
-          initial="initial"
-          animate="animate"
-          className="space-y-8"
-        >
-          {/* Main Heading */}
-          <motion.div variants={fadeInUp} className="space-y-4">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-              Find Your
-              <span className="block gradient-text">
-                Perfect Match
-              </span>
-              in Sri Lanka
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-              Connect with genuine people who share your values, culture, and dreams. 
-              Start your journey to meaningful relationships today.
-            </p>
+            <motion.div variants={fadeInUp}>
+              <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-300 font-light">
+                Trusted by thousands of students from UOC, UOM, J'Pura, Kelaniya & more. Start your journey today.
+              </p>
+            </motion.div>
           </motion.div>
+        </div>
 
-          {/* CTA Buttons */}
+        {/* --- Bottom Content: Glass Dock (CTAs & Stats) --- */}
+        <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 mt-8">
           <motion.div 
-            variants={fadeInUp}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl shadow-black/50"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-primary text-lg px-12 py-4"
-            >
-              Start Dating Now
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-secondary text-lg px-12 py-4 flex items-center gap-2"
-              onClick={() => setIsVideoOpen(true)}
-            >
-              <PlayIcon className="w-5 h-5" />
-              Watch Demo
-            </motion.button>
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+              
+              {/* Left: CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto shrink-0">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-purple-600 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 transition-all w-full sm:w-auto"
+                >
+                  Start Matching Now
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold text-lg px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all w-full sm:w-auto"
+                  onClick={() => setIsVideoOpen(true)}
+                >
+                  <PlayIcon className="w-5 h-5" />
+                  Watch Demo
+                </motion.button>
+              </div>
+
+              {/* Right: Stats */}
+              <div className="grid grid-cols-3 gap-4 sm:gap-8 w-full lg:w-auto">
+                <div className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold text-white">50K+</div>
+                  <div className="text-white/60 text-xs md:text-sm font-medium uppercase tracking-wider mt-1">Active Users</div>
+                </div>
+                <div className="text-center border-x border-white/10 px-4 sm:px-8">
+                  <div className="text-2xl md:text-3xl font-bold text-white">2.5K+</div>
+                  <div className="text-white/60 text-xs md:text-sm font-medium uppercase tracking-wider mt-1">Success</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold text-white">95%</div>
+                  <div className="text-white/60 text-xs md:text-sm font-medium uppercase tracking-wider mt-1">Match Rate</div>
+                </div>
+              </div>
+
+            </div>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div 
-            variants={fadeInUp}
-            className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12"
-          >
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white">50K+</div>
-              <div className="text-white/80 text-sm md:text-base">Active Users</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white">2.5K+</div>
-              <div className="text-white/80 text-sm md:text-base">Success Stories</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white">95%</div>
-              <div className="text-white/80 text-sm md:text-base">Match Rate</div>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-      </div>
-
-      {/* Floating Elements */}
-      <motion.div
-        animate={{ 
-          y: [0, -20, 0],
-          rotate: [0, 5, 0]
-        }}
-        transition={{ 
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute top-20 right-10 w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 opacity-30"
-      />
-      <motion.div
-        animate={{ 
-          y: [0, 30, 0],
-          rotate: [0, -5, 0]
-        }}
-        transition={{ 
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-        className="absolute bottom-32 left-10 w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 opacity-30"
-      />
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center text-white/70"
-        >
-          <span className="text-sm mb-2">Scroll to explore</span>
-          <ChevronDownIcon className="w-6 h-6" />
-        </motion.div>
-      </motion.div>
-
-      {/* Video Modal */}
-      {isVideoOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
-          onClick={() => setIsVideoOpen(false)}
-        >
+          {/* Scroll Indicator */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            className="bg-gray-900/90 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden max-w-4xl w-full aspect-video relative shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+            className="absolute -bottom-6 left-1/2 transform -translate-x-1/2"
           >
-            <button
-              onClick={() => setIsVideoOpen(false)}
-              className="absolute top-4 right-4 w-8 h-8 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors z-10"
-            >
-              ×
-            </button>
-            <video
-              controls
-              autoPlay
-              className="w-full h-full object-cover"
-            >
-              <source src="/videos/background.mp4" type="video/mp4" />
-            </video>
+            <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }} className="text-white/40">
+              <ChevronDownIcon className="w-6 h-6" />
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        </div>
+
+        {/* --- Video Modal --- */}
+        <AnimatePresence>
+          {isVideoOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+              onClick={() => setIsVideoOpen(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden max-w-5xl w-full aspect-video relative shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setIsVideoOpen(false)}
+                  className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/80 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-colors z-10"
+                >
+                  ✕
+                </button>
+                <video controls autoPlay className="w-full h-full object-cover">
+                  <source src="/videos/background.mp4" type="video/mp4" />
+                </video>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+      </div>
     </section>
   );
 };
